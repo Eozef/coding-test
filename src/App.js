@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+  const [number, setNumber] = useState(null);
+  useEffect(() => {
+    fetch("https://join.reckon.com/test1/rangeInfo")
+      .then((res) => res.json())
+      .then((number) => console.log(number))
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  if (!number) {
+    return <div></div>;
+  }
+
+  return <App number={number} />;
 }
-
-export default App;
