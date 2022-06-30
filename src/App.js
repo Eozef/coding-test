@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-export default function App() {
-  const [data, setData] = useState(null);
+export default async function App() {
+  {
+    let endPoint1 = await fetch("https://join.reckon.com/test1/rangeInfo");
+    let response1 = await endPoint1.json();
+    let endPoint2 = await fetch("https://join.reckon.com/test1/divisorInfo");
+    let response2 = await endPoint2.json();
 
-  useEffect(() => {
-    fetch("https://join.reckon.com/test1/rangeInfo")
-      .then((Response) => Response.json())
-      .then((Response) => console.log(Response))
-      .then(
-        fetch("https://join.reckon.com/test1/divisorInfo")
-          .then((Response) => Response.json())
-          .then((Response) => console.log(Response))
-      );
-  }, []);
+    let upperNumber = response1.upper;
+    let lowerNumber = response1.lower;
+   
+    // fetch("https://join.reckon.com/test1/rangeInfo")
+    //   .then((Response) => Response.json())
+    //   .then((Response) => console.log(Response))
+    //   .then(
+    //     fetch("https://join.reckon.com/test1/divisorInfo")
+    //       .then((Response) => Response.json())
+    //       .then((Response) => console.log(Response))
+    //   );
+  }
 
   return <div className="App">App</div>;
 }
