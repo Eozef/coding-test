@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
+
 export default function App() {
-  const [number, setNumber] = useState(null);
+  const [data, setData] = useState(null);
+
   useEffect(() => {
     fetch("https://join.reckon.com/test1/rangeInfo")
-      .then((res1) => res1.json())
-      .then((number) => console.log(number))
-      .catch((err1) => {
-        console.log(err1.message);
-      })
+      .then((Response) => Response.json())
+      .then((Response) => console.log(Response))
       .then(
         fetch("https://join.reckon.com/test1/divisorInfo")
-          .then((res2) => res2.json())
-          .then((number) => console.log(number))
-          .catch((err2) => {
-            console.log(err2.message);
-          })
+          .then((Response) => Response.json())
+          .then((Response) => console.log(Response))
       );
   }, []);
 
-  return <App number={number} />;
+  return <div className="App">App</div>;
 }
 
 // export default function App() {
