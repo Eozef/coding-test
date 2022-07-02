@@ -6,36 +6,26 @@ export default async function App() {
     let response1 = await endPoint1.json();
     let endPoint2 = await fetch("https://join.reckon.com/test1/divisorInfo");
     let response2 = await endPoint2.json();
+    let { lower, upper } = response1;
+    let { outputDetails } = response2;
 
-    let upperNumber = response1.upper;
-    let lowerNumber = response1.lower;
-   
-    // fetch("https://join.reckon.com/test1/rangeInfo")
-    //   .then((Response) => Response.json())
-    //   .then((Response) => console.log(Response))
-    //   .then(
-    //     fetch("https://join.reckon.com/test1/divisorInfo")
-    //       .then((Response) => Response.json())
-    //       .then((Response) => console.log(Response))
-    //   );
+    for (let i = lower + 1; i <= upper; i++) {
+      if (
+        i % outputDetails[0].divisor === 0 &&
+        i % outputDetails[1].divisor === 0
+      ) {
+        console.log(
+          `${i}: ${outputDetails[0].output} ${outputDetails[1].output}`
+        );
+      } else if (i % outputDetails[0].divisor === 0) {
+        console.log(`${i}: ${outputDetails[0].output}`);
+      } else if (i % outputDetails[1].divisor === 0) {
+        console.log(`${i}: ${outputDetails[1].output}`);
+      } else {
+        console.log(`${i}:`);
+      }
+    }
   }
 
   return <div className="App">App</div>;
 }
-
-// export default function App() {
-//   let endPoint1 = fetch("https://join.reckon.com/test1/rangeInfo");
-//   let endPoint2 = fetch("https://join.reckon.com/test1/divisorInfo");
-//   useEffect(() => {
-//     Promise.all([endPoint1, endPoint2])
-//       .then((numbers) => Promise.all(numbers.map((number) => number.json())))
-//       .then((totalNumber) => {
-//         let endPoint1Resp = totalNumber[0];
-//         let endPoint2Resp = totalNumber[1];
-//         let totalEndPointResp = endPoint1Resp + endPoint2Resp;
-//         return totalEndPointResp;
-//       });
-//   }, [endPoint1, endPoint2]);
-
-//   return <App totalEndPointResp />;
-// }
